@@ -39,7 +39,7 @@ export default function Home() {
     });
   }, [advocates, searchTerm]);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
@@ -47,56 +47,72 @@ export default function Home() {
     setSearchTerm("");
   };
 
-  const styles = {
-    container: { margin: "24px" },
-    input: { border: "1px solid black", padding: "4px" },
-    table: { width: "100%", borderCollapse: "collapse", marginTop: "16px" },
-    th: { border: "1px solid black", padding: "8px", textAlign: "left" },
-    td: { border: "1px solid black", padding: "8px" },
-  };
-
   return (
-    <main style={styles.container}>
-      <h1>Solace Advocates</h1>
+    <main className="m-6">
+      <h1 className="text-2xl font-bold mb-6">Solace Advocates</h1>
 
-      <div>
-        <label htmlFor="search-input">Search</label>
+      <div className="mb-6">
+        <label
+          htmlFor="search-input"
+          className="block text-lg font-medium mb-2"
+        >
+          Search
+        </label>
         <input
           id="search-input"
-          style={styles.input}
+          className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Search advocates..."
         />
-        <button onClick={handleReset}>Reset Search</button>
+        <button
+          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+          onClick={handleReset}
+        >
+          Reset Search
+        </button>
       </div>
 
-      <table style={styles.table}>
-        <thead>
+      <table className="w-full border-collapse border border-gray-300 text-left">
+        <thead className="bg-gray-100">
           <tr>
-            <th style={styles.th}>First Name</th>
-            <th style={styles.th}>Last Name</th>
-            <th style={styles.th}>City</th>
-            <th style={styles.th}>Degree</th>
-            <th style={styles.th}>Specialties</th>
-            <th style={styles.th}>Years of Experience</th>
-            <th style={styles.th}>Phone Number</th>
+            <th className="border border-gray-300 px-4 py-2">First Name</th>
+            <th className="border border-gray-300 px-4 py-2">Last Name</th>
+            <th className="border border-gray-300 px-4 py-2">City</th>
+            <th className="border border-gray-300 px-4 py-2">Degree</th>
+            <th className="border border-gray-300 px-4 py-2">Specialties</th>
+            <th className="border border-gray-300 px-4 py-2">
+              Years of Experience
+            </th>
+            <th className="border border-gray-300 px-4 py-2">Phone Number</th>
           </tr>
         </thead>
         <tbody>
           {filteredAdvocates.map((advocate, index) => (
-            <tr key={index}>
-              <td style={styles.td}>{advocate.firstName}</td>
-              <td style={styles.td}>{advocate.lastName}</td>
-              <td style={styles.td}>{advocate.city}</td>
-              <td style={styles.td}>{advocate.degree}</td>
-              <td style={styles.td}>
+            <tr key={index} className="hover:bg-gray-100">
+              <td className="border border-gray-300 px-4 py-2">
+                {advocate.firstName}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {advocate.lastName}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {advocate.city}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {advocate.degree}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
                 {advocate.specialties.map((s, idx) => (
                   <div key={idx}>{s}</div>
                 ))}
               </td>
-              <td style={styles.td}>{advocate.yearsOfExperience}</td>
-              <td style={styles.td}>{advocate.phoneNumber}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                {advocate.yearsOfExperience}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {advocate.phoneNumber}
+              </td>
             </tr>
           ))}
         </tbody>
